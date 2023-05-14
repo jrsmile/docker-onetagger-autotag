@@ -14,7 +14,7 @@ ADD main /tmp
 RUN --mount=type=secret,id=SPOTIFY_CLIENT_ID,required \
  --mount=type=secret,id=SPOTIFY_CLIENT_SECRET,required \
  cat /run/secrets/SPOTIFY_CLIENT_ID > /tmp/cl && \
- echo ":" >> /tmp/cl &&\
+ echo -n ":" >> /tmp/cl &&\
  cat /run/secrets/SPOTIFY_CLIENT_SECRET >> /tmp/cl && \
  cat /tmp/cl | openssl enc -A -base64 > /tmp/cl64 && \
  curl -X "POST" -H "Authorization: Basic $(cat /tmp/cl64)" -d grant_type=client_credentials https://accounts.spotify.com/api/token > /tmp/token
