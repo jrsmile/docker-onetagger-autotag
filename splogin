@@ -1,4 +1,4 @@
 #!/bin/bash
 /usr/bin/onetagger-cli authorize-spotify --client-id $(cat /tmp/cl | cut -d: -f1) --client-secret $(cat /tmp/cl | cut -d: -f2) &
-read -e -p "Response URI: " uri
+read -e -p "Paste the response URI here and press enter: " uri
 curl -s "$uri"

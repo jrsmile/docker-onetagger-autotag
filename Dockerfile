@@ -12,6 +12,7 @@ ADD https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLA
 RUN tar -C / -Jxpf /tmp/s6-overlay-x86_64.tar.xz
 ADD main /tmp
 ADD splogin /usr/bin
+ADD autotag /usr/bin
 RUN --mount=type=secret,id=SPOTIFY_CLIENT_ID,required \
  --mount=type=secret,id=SPOTIFY_CLIENT_SECRET,required \
  cat /run/secrets/SPOTIFY_CLIENT_ID > /tmp/cl && \
@@ -21,5 +22,6 @@ RUN mkdir -p /root/.config/onetagger && \
   /usr/bin/./onetagger-cli --audiofeatures-config > /root/.config/onetagger/config.json
 RUN chmod +x /tmp/main
 RUN chmod +x /usr/bin/splogin
+RUN chmod +x /usr/bin/autotag
 CMD ["/tmp/main"]
 ENTRYPOINT ["/init"]

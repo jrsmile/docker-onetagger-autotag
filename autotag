@@ -1,0 +1,2 @@
+#!/bin/bash
+/usr/bin/onetagger-cli audiofeatures --config /root/.config/onetagger/config.json --path /music --client-id $(cat /tmp/cl | cut -d: -f1) --client-secret $(cat /tmp/cl | cut -d: -f2)
