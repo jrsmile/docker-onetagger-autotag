@@ -30,6 +30,6 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/onetagger-autotag:latest
           secrets: |
-            SPOTIFY_CLIENT_ID=${{ secrets.SPOTIFY_CLIENT_ID }}
-            SPOTIFY_CLIENT_SECRET=${{ secrets.SPOTIFY_CLIENT_SECRET }}
+            SPOTIFY_CLIENT_ID=test1
+            SPOTIFY_CLIENT_SECRET=test2
             
