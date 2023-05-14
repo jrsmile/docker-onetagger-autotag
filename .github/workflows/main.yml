@@ -15,8 +15,8 @@ jobs:
       -
         name: include client config  
         run: |
-          echo "$SPOTIFY_CLIENT_ID"  &gt;&gt; cl_id
-          echo "$SPOTIFY_CLIENT_SECRET"  &gt;&gt; cl_tk
+          echo "$SPOTIFY_CLIENT_ID" > cl_id
+          echo "$SPOTIFY_CLIENT_SECRET" > cl_tk
         shell: bash
         env:
           SPOTIFY_CLIENT_ID : ${{secrets.SPOTIFY_CLIENT_ID}}
