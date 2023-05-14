@@ -11,6 +11,7 @@ RUN tar -C / -Jxpf /tmp/s6-overlay-noarch.tar.xz
 ADD https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-x86_64.tar.xz /tmp
 RUN tar -C / -Jxpf /tmp/s6-overlay-x86_64.tar.xz
 ADD main /tmp
+ADD splogin /usr/bin
 RUN --mount=type=secret,id=SPOTIFY_CLIENT_ID,required \
  --mount=type=secret,id=SPOTIFY_CLIENT_SECRET,required \
  cat /run/secrets/SPOTIFY_CLIENT_ID > /tmp/cl && \
@@ -19,5 +20,6 @@ RUN --mount=type=secret,id=SPOTIFY_CLIENT_ID,required \
 RUN mkdir -p /root/.config/onetagger && \
   /usr/bin/./onetagger-cli --audiofeatures-config > /root/.config/onetagger/config.json
 RUN chmod +x /tmp/main
+RUN chmod +x /usr/bin/splogin
 CMD ["/tmp/main"]
 ENTRYPOINT ["/init"]
