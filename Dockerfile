@@ -13,8 +13,11 @@ RUN tar -C / -Jxpf /tmp/s6-overlay-x86_64.tar.xz
 ADD main /tmp
 RUN --mount=type=secret,id=SPOTIFY_CLIENT_ID,required \
  --mount=type=secret,id=SPOTIFY_CLIENT_SECRET,required \
- cat /run/secrets/SPOTIFY_CLIENT_ID >> /tmp/cl_id && \
- cat /run/secrets/SPOTIFY_CLIENT_SECRET >> /tmp/cl_tk
+ cat /run/secrets/SPOTIFY_CLIENT_ID > /tmp/cl && \
+ echo ":" >> /tmp/cl &&\
+ cat /run/secrets/SPOTIFY_CLIENT_SECRET >> /tmp/cl && \
+ cat /tmp/cl | openssl enc -A -base64 > /tmp/cl64 && \
+ curl -X "POST" -H "Authorization: Basic $(cat /tmp/cl64)" -d grant_type=client_credentials https://accounts.spotify.com/api/token > /tmp/token
 RUN chmod +x /tmp/main
 CMD ["/tmp/main"]
 ENTRYPOINT ["/init"]
