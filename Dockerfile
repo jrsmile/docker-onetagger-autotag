@@ -2,6 +2,8 @@ FROM alpine
 ARG S6_OVERLAY_VERSION=3.1.5.0
 ARG ONETAGGER_VERSION=1.6.0
 
+RUN apk add libc6-compat
+
 ADD https://github.com/Marekkon5/onetagger/releases/download/${ONETAGGER_VERSION}/OneTagger-linux-cli.tar.gz /tmp
 RUN tar -C /usr/bin/ -xzf /tmp/OneTagger-linux-cli.tar.gz
 #CMD ["/tmp/./onetagger-cli","authorize-spotify","--client-id", "--client-secret"]
