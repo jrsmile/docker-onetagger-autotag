@@ -4,7 +4,7 @@ ARG S6_OVERLAY_VERSION=3.1.5.0
 ARG ONETAGGER_VERSION=1.6.0
 
 #RUN apk add gcompat alsa-lib libgcc
-RUN apt-get update -y && apt-get upgrade -y && apt-get install tar -y
+RUN apt-get update -y && apt-get upgrade -y && apt-get install tar xz-utils -y
 
 ADD https://github.com/Marekkon5/onetagger/releases/download/${ONETAGGER_VERSION}/OneTagger-linux-cli.tar.gz /tmp
 RUN tar -C /usr/bin/ -xzf /tmp/OneTagger-linux-cli.tar.gz
